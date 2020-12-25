@@ -81,10 +81,16 @@ class ViewController: UIViewController {
             updateUI()
 
         }else{ //RESET QUIZ - restart counters and progress view
+            
+            //Use to output users score
+            let finalScorePercent = (Float(self.correctQuestions) / Float(self.totalNumberOfQuestions)) * 100.0
+            
+            let finalScoreStr = String(format: "%.2f", finalScorePercent)
+            
             questionNumber = 0
             correctQuestions = 0
-            questionLabel.text = "Restarting Quiz..."
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            questionLabel.text = "Final Score: " + finalScoreStr + "%"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.progressBar.progress = Float(self.correctQuestions) / Float(self.totalNumberOfQuestions)
                 self.updateUI()
             }
